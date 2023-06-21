@@ -1,0 +1,59 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '2.7.4'
+}
+
+//java version
+java.sourceCompatibility = JavaVersion.VERSION_1_8;
+
+//repositories gradle will look into for dependencies
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+//variables
+def springBootVersion = '2.7.4'
+
+//dependencies
+dependencies {
+    // scopes
+    // |-->implementation - compile + run + test
+    // |-->compileOnly - compile (not accessible in tests)
+    // |-->runtimeOnly - runtime (accesible in tests)
+    // tests
+    // |-->testCompileOnly - test compile stage
+    // |-->testRuntimeOnly - test runtime stage
+    // |-->testImplementation - compile + run
+    // annotation processing
+    // |-->annotationProcessor - project annotation processing (except test)
+    // |-->testAnnotationProcessor - test annotation processing
+    // for library modules
+    // |-->api - making dependecy available when writing library or importing module
+    // |-->compileOnlyApi - same as api
+    implementation group:'org.springframework.boot', name:'spring-boot-starter-data-jpa', version: $springBootVersion
+
+    annotationProcessor: "org.projectlombok:lombok:1.18.16"
+    compileOnly : "org.projectlombok:lombok:1.18.16"
+}
+
+/**
+    task - a work unit
+    every task in gradle is an object, it can be configured,
+    you can inherit your task from it and add something to it by yourself.
+
+    in task, you can add any java/groovey code
+    
+    : gradle tasks - print available tasks
+    : gradle clean - remove build package
+    : gradle build - build project
+    : gradle build -x test - build project and skip 'test' task
+    : gradlew.bat build --dry-run => run build task and show tasks running order
+ */
+
+ subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframwork.boot'
+
+ }
+
